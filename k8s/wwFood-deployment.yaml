@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wwFood-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wwFood
+  template:
+    metadata:
+      labels:
+        app: wwFood
+    spec:
+      containers:
+      - name: wwFood
+        image: qiuer0121/wwFood:latest
+        ports:
+        - containerPort: 8080
+
