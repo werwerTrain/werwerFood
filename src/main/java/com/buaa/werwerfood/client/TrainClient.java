@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "train-service")
+@FeignClient(name = "train-service", path = "/api/trains")
 public interface TrainClient {
 
-    @GetMapping("train-service/{tid}/{date}/{userID}")
+    @GetMapping("train/{tid}/{date}/{userID}")
     public List<TrainOrderDTO> getTrainOrderByTrainAndIdentification(
             @PathVariable String tid,
             @PathVariable String date,
             @PathVariable String userID
     );
 
-    @GetMapping("train-service/{tid}/{date}")
+    @GetMapping("train/{tid}/{date}")
     public TrainDTO getTrainByTidAndDate(
             @PathVariable String tid,
             @PathVariable String date

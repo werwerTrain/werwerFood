@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Map;
 
-@FeignClient(name = "user-service",contextId = "messageClient")
+@FeignClient(name = "user-service",contextId = "messageClient", path = "/api/users")
 public interface MessageClient {
     @PostMapping("/addMessage")
     void addMessage(@RequestBody Map<String, Object> messageMap);

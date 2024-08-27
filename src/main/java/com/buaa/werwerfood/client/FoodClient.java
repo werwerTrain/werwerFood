@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "food-service")
+@FeignClient(name = "food-service", contextId = "foodClient", path = "/api/foods")
 public interface FoodClient {
     @GetMapping("food/{oid}")
     public List<FoodOrderDTO> getFoodOrders(

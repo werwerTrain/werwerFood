@@ -52,7 +52,7 @@ public class FoodController {
     private EmailService emailService;
 
     // 微服务接口
-    @GetMapping("food/{oid}")
+    @GetMapping("/food/{oid}")
     public List<FoodOrder> getFoodOrders(
             @PathVariable String oid
     ) {
