@@ -189,12 +189,14 @@ public class FoodController {
         };
 
         List<Object> result = new ArrayList<>();
-        orders.forEach(order -> {
+        for (OrderDTO order : orders) {
             HashMap<String, Object> map = new HashMap<>();
 
             List<FoodOrder> foodOrders = foodService.getFoodOrdersByOid(order.getOid());
-            if (foodOrders.isEmpty())
-                System.out.println(order.getOid());
+            if (foodOrders.isEmpty()) {
+//                System.out.println(order.getOid());
+                continue;
+            }
             map.put("tid", foodOrders.get(0).getTrainId());
             map.put("oid", order.getOid());
             map.put("order_time", order.getBillTime());
@@ -230,7 +232,7 @@ public class FoodController {
             });
             map.put("foods", foods);
             result.add(map);
-        });
+        };
 
         return new HashMap<>() {{
             put("result", result);

@@ -6,22 +6,23 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "user-service", path = "/api/users")
+@FeignClient(name = "user-service", contextId = "orderClient", path = "/api/users")
 public interface OrderClient {
+
     @GetMapping("/orders/{uid}/status")
     List<OrderDTO> getOrdersByUidAndStatus(@PathVariable("uid") String uid,
                                            @RequestParam("status") String status,
                                            @RequestParam("type") String type);
 
-    @GetMapping("/orders/{uid}")
+    @GetMapping("/orders/byUid/{uid}")
     List<OrderDTO> getOrderByUid(@PathVariable("uid") String uid,
                                  @RequestParam("type") String type);
 
-    @GetMapping("/orders/{oid}/{uid}")
+    @GetMapping("/orders/byOidAndUid/{oid}/{uid}")
     OrderDTO getOrderByOidAndUid(@PathVariable("oid") String oid,
                                  @PathVariable("uid") String uid);
 
-    @GetMapping("/orders/{oid}")
+    @GetMapping("/orders/byOid/{oid}")
     OrderDTO getOrder(@PathVariable("oid") String oid);
 
     @PostMapping("/orders/addOrder")
@@ -47,12 +48,13 @@ public interface OrderClient {
     @GetMapping("/orders/trains")
     List<OrderDTO> getAllTrain();
 
-    @GetMapping("/orders/{orderId}/message-sent")
+    @GetMapping("/orders/{orderId}/get-message-sent")
     Boolean getMessageSend(@PathVariable("orderId") String orderId);
 
-    @PostMapping("/orders/{orderId}/message-sent")
+    @PostMapping("/orders/{orderId}/set-message-sent")
     void setMessageHaveSend(@PathVariable("orderId") String orderId);
 
     @PostMapping("/orders/{oid}/finish")
     void finishOrder(@PathVariable("oid") String oid);
 }
+
