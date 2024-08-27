@@ -11,14 +11,14 @@ import java.util.List;
 @FeignClient(name = "train-service")
 public interface TrainClient {
 
-    @GetMapping("train/{tid}/{date}/{userID}")
+    @GetMapping("train-service/{tid}/{date}/{userID}")
     public List<TrainOrderDTO> getTrainOrderByTrainAndIdentification(
             @PathVariable String tid,
             @PathVariable String date,
             @PathVariable String userID
     );
 
-    @GetMapping("trains/{tid}/{date}")
+    @GetMapping("train-service/{tid}/{date}")
     public TrainDTO getTrainByTidAndDate(
             @PathVariable String tid,
             @PathVariable String date

@@ -51,6 +51,14 @@ public class FoodController {
     @Autowired
     private EmailService emailService;
 
+    // 微服务接口
+    @GetMapping("food-service/{oid}")
+    public List<FoodOrder> getFoodOrders(
+            @PathVariable String oid
+    ) {
+        return foodService.getFoodOrdersByOid(oid);
+    }
+
     @GetMapping("/food/{userID}/{tid}/{date}/{time}")
     Map<String, Object> getAllFood(@PathVariable String tid,
                                    @PathVariable String userID,
