@@ -20,21 +20,21 @@ pipeline {
             steps {
                 script {
                     powershell '''
-                    $containers = docker ps -q --filter "ancestor=qiuer0121/wwFood:latest"
+                    $containers = docker ps -q --filter "ancestor=qiuer0121/wwfood:latest"
                     foreach ($container in $containers) {
                         Write-Output "Stopping container $container"
                         docker stop $container
                     }
     
-                    $allContainers = docker ps -a -q --filter "ancestor=qiuer0121/wwFood:latest"
+                    $allContainers = docker ps -a -q --filter "ancestor=qiuer0121/wwfood:latest"
                     foreach ($container in $allContainers) {
                         Write-Output "Removing container $container"
                         docker rm $container
                     }
                     '''
-                    bat 'docker rmi -f qiuer0121/wwFood:latest'
+                    bat 'docker rmi -f qiuer0121/wwfood:latest'
                     bat '''
-                    docker build -t qiuer0121/wwFood .
+                    docker build -t qiuer0121/wwfood .
                     '''
                 }
             }
@@ -45,7 +45,7 @@ pipeline {
                 script {
                         bat '''
                         echo 20050121Rabbit| docker login -u qiuer0121 --password-stdin
-                        docker push qiuer0121/wwFood:latest
+                        docker push qiuer0121/wwfood:latest
                         '''
                 }
             }
