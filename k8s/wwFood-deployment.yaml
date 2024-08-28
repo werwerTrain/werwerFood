@@ -16,5 +16,5 @@ spec:
       - name: wwFood
         image: qiuer0121/wwFood:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 9094
 
