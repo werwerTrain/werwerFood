@@ -11,8 +11,8 @@ pipeline {
         // stage('delete old image in k8s'){
         //     steps{
         //          bat '''
-        //         kubectl delete -f k8s/wwfood-deployment.yaml
-        //         kubectl delete -f k8s/wwfood-service.yaml
+        //         kubectl delete -f k8s/wwFood-deployment.yaml
+        //         kubectl delete -f k8s/wwFood-service.yaml
         //         '''
         //     }
         // }
@@ -55,9 +55,9 @@ pipeline {
         stage('deploy to k8s'){
             steps{
                 bat '''
-                kubectl apply -f k8s/wwfood-deployment.yaml
-                kubectl apply -f k8s/wwfood-service.yaml
-                kubectl apply -f k8s/wwfood-hpa.yaml
+                kubectl apply -f k8s/wwFood-deployment.yaml
+                kubectl apply -f k8s/wwFood-service.yaml
+                kubectl apply -f k8s/wwFood-hpa.yaml
                 '''
                 echo '部署成功'
             }
