@@ -57,6 +57,7 @@ pipeline {
                 bat '''
                 kubectl apply -f k8s/wwFood-deployment.yaml
                 kubectl apply -f k8s/wwFood-service.yaml
+                kubectl apply -f k8s/wwFood-hpa.yaml
                 '''
                 echo '部署成功'
             }
