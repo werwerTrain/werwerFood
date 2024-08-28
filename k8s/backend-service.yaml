@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: werwerFood-service
+  name: werwerfood-service
 spec:
   selector:
-    app: werwerFood
+    app: werwerfood
   ports:
     - protocol: TCP
       port: 9094

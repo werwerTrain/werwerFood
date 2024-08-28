@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: werwerFood-deployment
+  name: werwerfood-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: werwerFood
+      app: werwerfood
   template:
     metadata:
       labels:
-        app: werwerFood
+        app: werwerfood
     spec:
       containers:
-      - name: werwerFood
-        image: luluplum/werwerFood:latest
+      - name: werwerfood
+        image: luluplum/werwerfood:latest
         ports:
         - containerPort: 9094

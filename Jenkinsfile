@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         // 设置 Docker 镜像的标签
-        BACKEND_IMAGE = "luluplum/werwerFood:latest"
+        BACKEND_IMAGE = "luluplum/werwerfood:latest"
         DOCKER_CREDENTIALS_ID = '9b671c50-14d3-407d-9fe7-de0463e569d2'
         DOCKER_PASSWORD = 'luluplum'
         DOCKER_USERNAME = 'woaixuexi0326'
