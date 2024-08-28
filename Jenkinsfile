@@ -8,14 +8,14 @@ pipeline {
             }
         }
         
-        // stage('delete old image in k8s'){
-        //     steps{
-        //          bat '''
-        //         kubectl delete -f k8s/wwFood-deployment.yaml
-        //         kubectl delete -f k8s/wwFood-service.yaml
-        //         '''
-        //     }
-        // }
+        stage('delete old image in k8s'){
+            steps{
+                 bat '''
+                kubectl delete -f k8s/wwFood-deployment.yaml || true
+                kubectl delete -f k8s/wwFood-service.yaml || true
+                '''
+            }
+        }
         stage('Build new image') {
             steps {
                 script {
@@ -32,7 +32,7 @@ pipeline {
                         docker rm $container
                     }
                     '''
-                    bat 'docker rmi -f qiuer0121/wwfood:latest'
+                    bat 'docker rmi -f qiuer0121/wwfood:latest || true'
                     bat '''
                     docker build -t qiuer0121/wwfood .
                     '''
