@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wwFood-deployment
+  name: wwfood-deployment
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: wwFood
+      app: wwfood
   strategy:
     rollingUpdate: 
       maxSurge: 50% 
@@ -15,10 +15,10 @@ spec:
   template:
     metadata:
       labels:
-        app: wwFood
+        app: wwfood
     spec:
       containers:
-      - name: wwFood
+      - name: wwfood
         image: qiuer0121/wwfood:latest
         ports:
         - containerPort: 9094
