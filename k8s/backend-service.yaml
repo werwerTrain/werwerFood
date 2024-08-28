@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: werwerFood-service
+spec:
+  selector:
+    app: werwerFood
+  ports:
+    - protocol: TCP
+      port: 9094
+      targetPort: 9094
+      nodePort: 30006
+  type: NodePort
