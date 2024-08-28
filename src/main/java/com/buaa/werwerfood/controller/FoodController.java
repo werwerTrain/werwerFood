@@ -59,6 +59,23 @@ public class FoodController {
         return foodService.getFoodOrdersByOid(oid);
     }
 
+    @GetMapping("/getRelate/{tid}/{date}/{uid}")
+    public List<OrderDTO> getTrainRelatedFoodOrders(@PathVariable String tid, @PathVariable String date, @PathVariable String uid) {
+        List<OrderDTO> list = new ArrayList<>();
+
+        orderClient.getOrderByUid(uid, "Food").forEach(o-> {
+            // 该user的每个车餐订单
+            foodService.getFoodOrdersByOid(o.getOid()).forEach(fo-> {
+                // System.out.println(o.getOid());
+                if (fo.getTrainDate().equals(date) && fo.getTrainId().equals(tid)) {
+                    // 对应的车次的foodOrder
+                    list.add(orderClient.getOrder(fo.getOid()));
+                }
+            });
+        });
+        return list;
+    }
+
     @GetMapping("/food/{userID}/{tid}/{date}/{time}")
     Map<String, Object> getAllFood(@PathVariable String tid,
                                    @PathVariable String userID,
