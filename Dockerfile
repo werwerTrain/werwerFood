@@ -12,7 +12,7 @@ COPY src/ ./src/
 RUN mvn clean package
 
 # 运行应用
-CMD ["java", "-jar", "target/se_project-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "target/werwerFood-0.0.1-SNAPSHOT.jar"]
 
 # 暴露端口
 EXPOSE 9094
