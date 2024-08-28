@@ -9,5 +9,5 @@ spec:
     - protocol: TCP
       port: 9094
       targetPort: 9094
-      nodePort: 30014
+      nodePort: 30061
   type: NodePort

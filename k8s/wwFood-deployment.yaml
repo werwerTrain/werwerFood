@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: wwfood
-        image: qiuer0121/wwfood:latest
+        image: bxr0820/wwfood:latest
         ports:
         - containerPort: 9094
 

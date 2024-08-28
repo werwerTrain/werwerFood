@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'sxq', url: 'https://github.com/werwerTrain/werwerFood.git'
+                git branch: 'bxr', url: 'https://github.com/werwerTrain/werwerFood.git'
             }
         }
         
@@ -20,21 +20,21 @@ pipeline {
             steps {
                 script {
                     powershell '''
-                    $containers = docker ps -q --filter "ancestor=qiuer0121/wwfood:latest"
+                    $containers = docker ps -q --filter "ancestor=bxr0820/wwfood:latest"
                     foreach ($container in $containers) {
                         Write-Output "Stopping container $container"
                         docker stop $container
                     }
     
-                    $allContainers = docker ps -a -q --filter "ancestor=qiuer0121/wwfood:latest"
+                    $allContainers = docker ps -a -q --filter "ancestor=bxr0820/wwfood:latest"
                     foreach ($container in $allContainers) {
                         Write-Output "Removing container $container"
                         docker rm $container
                     }
                     '''
-                    bat 'docker rmi -f qiuer0121/wwfood:latest || true'
+                    bat 'docker rmi -f bxr0820/wwfood:latest || true'
                     bat '''
-                    docker build -t qiuer0121/wwfood .
+                    docker build -t bxr0820/wwfood .
                     '''
                 }
             }
@@ -44,8 +44,8 @@ pipeline {
             steps {
                 script {
                         bat '''
-                        echo 20050121Rabbit| docker login -u qiuer0121 --password-stdin
-                        docker push qiuer0121/wwfood:latest
+                        echo buxinran123| docker login -u bxr0820 --password-stdin
+                        docker push bxr0820/wwfood:latest
                         '''
                 }
             }
