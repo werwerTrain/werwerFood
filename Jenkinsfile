@@ -86,11 +86,7 @@ pipeline {
                 sh 'npm install -g apifox-cli'
             }
         }
-        stage('Running Test Scenario') {
-            steps {
-                sh 'apifox run https://api.apifox.com/api/v1/projects/4458630/api-test/ci-config/455500/detail?token=xst_-7kP70toSLt_CssqOW -r html,cli'
-            }
-        }
+       
 
         stage('Integration Test') {
             steps {
