@@ -1,12 +1,15 @@
 package com.buaa.werwerfood.client;
 
 import com.buaa.werwerfood.DTO.OrderDTO;
+import com.buaa.werwerfood.client.fallback.OrderClientFallback;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "user-service", contextId = "orderClient", path = "/api/users")
+@FeignClient(name = "user-service", contextId = "orderClient", path = "/api/users",
+fallback = OrderClientFallback.class)
 public interface OrderClient {
 
     @GetMapping("/orders/{uid}/status")

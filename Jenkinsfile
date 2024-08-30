@@ -70,10 +70,12 @@ pipeline {
                     // 应用 Kubernetes 配置
                     sh 'kubectl apply -f k8s/backend-deployment.yaml'
 
-                   
-                    // 应用 Kubernetes 配置
-                    sh 'kubectl apply -f k8s/backend-hpa.yaml'
                 }
+            }
+        }
+        stage('Deploy HPA Configuration') {
+            steps {
+                sh 'kubectl apply -f k8s/backend-hpa.yaml'
             }
         }
 
@@ -85,26 +87,7 @@ pipeline {
                 }
             }
         }
-        stage('Install Apifox CLI') {
-            steps {
-                sh 'npm install -g apifox-cli'
-            }
-        }
-       
-
-        stage('Integration Test') {
-            steps {
-                echo 'tested!'
-                // 等待应用启动
-                //sleep(time: 30, unit: 'SECONDS')
-                
-                // 使用测试工具进行集成测试
-                
-                // 使用 Postman Collection 进行测试
-                //sh 'newman run collection.json'  // 如果使用 Newman 运行 Postman 测试
-                
-            }
-        }
+        
     }
 
     post {

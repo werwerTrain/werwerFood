@@ -11,6 +11,7 @@ import com.buaa.werwerfood.client.UserClient;
 import com.buaa.werwerfood.service.*;
 import com.buaa.werwerfood.entity.*;
 import com.buaa.werwerfood.service.Impl.EmailService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -53,10 +54,39 @@ public class FoodController {
 
     // 微服务接口
     @GetMapping("/food/{oid}")
+    @CircuitBreaker(name = "food-service", fallbackMethod = "getFoodOrdersFallback")
     public List<FoodOrder> getFoodOrders(
             @PathVariable String oid
     ) {
         return foodService.getFoodOrdersByOid(oid);
+    }
+
+    public List<FoodOrder> getFoodOrdersFallback(String oid, Throwable throwable) {
+        System.out.println("Get food orders request failed, fallback method executed.");
+        return new ArrayList<>();
+    }
+
+
+    @GetMapping("/getRelate/{tid}/{date}/{uid}")
+    @CircuitBreaker(name = "getRelate", fallbackMethod = "getRelateFallback")
+    public List<OrderDTO> getTrainRelatedFoodOrders(@PathVariable String tid, @PathVariable String date, @PathVariable String uid) {
+        List<OrderDTO> list = new ArrayList<>();
+
+        orderClient.getOrderByUid(uid, "Food").forEach(o-> {
+            // 该user的每个车餐订单
+            foodService.getFoodOrdersByOid(o.getOid()).forEach(fo-> {
+                // System.out.println(o.getOid());
+                if (fo.getTrainDate().equals(date) && fo.getTrainId().equals(tid)) {
+                    // 对应的车次的foodOrder
+                    list.add(orderClient.getOrder(fo.getOid()));
+                }
+            });
+        });
+        return list;
+    }
+
+    public List<OrderDTO> getRelatedFallback(String tid, String date, String uid, Throwable throwable) {
+        return new ArrayList<>();
     }
 
     @GetMapping("/food/{userID}/{tid}/{date}/{time}")
