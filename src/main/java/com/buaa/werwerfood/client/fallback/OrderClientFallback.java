@@ -2,12 +2,14 @@ package com.buaa.werwerfood.client.fallback;
 
 import com.buaa.werwerfood.DTO.OrderDTO;
 import com.buaa.werwerfood.client.OrderClient;
+import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Component
 public class OrderClientFallback implements OrderClient {
     @Override
     public List<OrderDTO> getOrdersByUidAndStatus(String uid, String status, String type) {

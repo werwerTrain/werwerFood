@@ -1,9 +1,11 @@
 package com.buaa.werwerfood.client.fallback;
 
 import com.buaa.werwerfood.client.MessageClient;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+@Component
 public class MessageClientFallback implements MessageClient {
 
     @Override

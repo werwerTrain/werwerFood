@@ -1,7 +1,9 @@
 package com.buaa.werwerfood.client.fallback;
 
 import com.buaa.werwerfood.client.UserClient;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserClientFallback implements UserClient {
 
     @Override

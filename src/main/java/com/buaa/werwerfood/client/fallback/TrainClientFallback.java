@@ -3,10 +3,13 @@ package com.buaa.werwerfood.client.fallback;
 import com.buaa.werwerfood.DTO.TrainDTO;
 import com.buaa.werwerfood.DTO.TrainOrderDTO;
 import com.buaa.werwerfood.client.TrainClient;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class TrainClientFallback implements TrainClient {
     @Override
     public List<TrainOrderDTO> getTrainOrderByTrainAndIdentification(String tid, String date, String userID) {

@@ -11,6 +11,7 @@ import com.buaa.werwerfood.client.UserClient;
 import com.buaa.werwerfood.service.*;
 import com.buaa.werwerfood.entity.*;
 import com.buaa.werwerfood.service.Impl.EmailService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -53,13 +54,21 @@ public class FoodController {
 
     // 微服务接口
     @GetMapping("/food/{oid}")
+    @CircuitBreaker(name = "food-service", fallbackMethod = "getFoodOrdersFallback")
     public List<FoodOrder> getFoodOrders(
             @PathVariable String oid
     ) {
         return foodService.getFoodOrdersByOid(oid);
     }
 
+    public List<FoodOrder> getFoodOrdersFallback(String oid, Throwable throwable) {
+        System.out.println("Get food orders request failed, fallback method executed.");
+        return new ArrayList<>();
+    }
+
+
     @GetMapping("/getRelate/{tid}/{date}/{uid}")
+    @CircuitBreaker(name = "getRelate", fallbackMethod = "getRelateFallback")
     public List<OrderDTO> getTrainRelatedFoodOrders(@PathVariable String tid, @PathVariable String date, @PathVariable String uid) {
         List<OrderDTO> list = new ArrayList<>();
 
@@ -74,6 +83,10 @@ public class FoodController {
             });
         });
         return list;
+    }
+
+    public List<OrderDTO> getRelatedFallback(String tid, String date, String uid, Throwable throwable) {
+        return new ArrayList<>();
     }
 
     @GetMapping("/food/{userID}/{tid}/{date}/{time}")

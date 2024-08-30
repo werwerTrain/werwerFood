@@ -18,6 +18,12 @@ public class EmailService {
         message.setSubject(subject);
         message.setText(text);
         message.setFrom("werwertrip@163.com");
-        mailSender.send(message);
+        try {
+            mailSender.send(message);
+            System.out.println("Email sent successfully to " + to);
+        } catch (Exception e) {
+            System.err.println("Failed to send email to " + to + ": " + e.getMessage());
+            // 放弃发送邮件，方法结束
+        }
     }
 }
