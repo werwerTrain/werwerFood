@@ -70,7 +70,7 @@ pipeline {
                     // 应用 Kubernetes 配置
                     sh 'kubectl apply -f k8s/backend-deployment.yaml'
 
-                    sh 'kubectl delete -f k8s/backend-hpa.yaml'
+                   
                     // 应用 Kubernetes 配置
                     sh 'kubectl apply -f k8s/backend-hpa.yaml'
                 }
